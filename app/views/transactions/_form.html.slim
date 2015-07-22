@@ -1,0 +1,29 @@
+= form_for @transaction do |f|
+  = f.hidden_field :trans_type
+
+  - if @transaction.errors.any?
+    #error_explanation.
+      h5 = "#{pluralize(@transaction.errors.count, "error")} prohibited this transaction from being saved:"
+      .alert.alert-danger
+        - @transaction.errors.full_messages.each do |message|
+          p = message
+
+  .form-group
+    = f.label "Caption"
+    = f.text_field :caption, class: 'form-control'
+
+  .form-group
+    = f.label "Quantity"
+    = f.text_field :quantity, class: 'form-control'
+
+  .form-group
+    = f.label "Category"
+    = f.select :category_id, options_from_collection_for_select(Category.where(category_type: Transaction.trans_types[@transaction.trans_type]), "id", "name"), {}, { class: "form-control"}
+
+  .form-group
+    = f.label "Attachment"
+    = f.file_field :attachment
+
+  hr
+  .form-group
+    = f.submit class: 'btn btn-primary'

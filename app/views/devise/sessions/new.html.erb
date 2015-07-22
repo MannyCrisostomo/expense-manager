@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="login-panel panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Expense Manager</h3>
+                </div>
+                <div class="panel-body">
+                    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                        <fieldset>
+                            <div class="form-group">
+                                <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "Email Address" %>
+                            </div>
+                            <div class="form-group">
+                                <%= f.password_field :password, autocomplete: "off", class: "form-control", placeholder: "password" %>
+                            </div>
+
+                            <div class="checkbox">
+                                <label>
+                                    <%= f.check_box :remember_me %>
+                                    <%= f.label :remember_me %>
+                                </label>
+                            </div>
+
+                            <!-- Change this to a button or input when using this as a form -->
+                            <%= f.submit "Log in", class: "btn btn-lg btn-success btn-block" %>
+                        </fieldset>
+
+                    <% end %>
+                </div>
+
+                <div style="padding:0px 15px">
+                  <%= google_plus_button(script: true) %>
+                  <%= like_button(1500782956849170) %>
+                  <br>
+                  <%= render "devise/shared/links" %>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

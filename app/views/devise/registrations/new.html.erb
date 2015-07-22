@@ -1,0 +1,61 @@
+<h2>Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :date_of_birth %><br />
+    <%= f.date_field :date_of_birth, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @validatable %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+  </div>
+
+  <div class="field">
+    <%= f.label "Security Question" %><br />
+    <%= f.select :security_question_id, options_from_collection_for_select(SecurityQuestion.all, "id", "name"), {}, { class: "form-control"} %>
+  </div>
+  <div class="field">
+    <%= f.label "Security Question Answer" %><br />
+    <%= f.text_field :security_question_answer, { class: "form-control"} %>
+  </div>
+
+
+  <p class="signup_text margin-top">
+    We need some quick proof you're not a bot. Tell us what you see like at the eye-doctor.
+  </p>
+
+  <p><%= captcha_tag %></p>
+  <p><%= text_field_tag :captcha %></p>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %>

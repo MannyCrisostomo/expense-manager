@@ -1,0 +1,39 @@
+h1 Transactions
+hr
+
+h3= "Current Balance: #{number_to_currency(current_user.current_amount, unit: '$')}"
+
+.clearfix
+  .pull-right
+    = link_to "Create New Income", new_income_transactions_path, class: 'btn btn-success'
+  .pull-right
+    = link_to "Create New Expense", new_expense_transactions_path, class: 'btn btn-primary'
+hr
+
+table.table.table-striped
+  tr
+    th Value
+    th Note
+    th Category
+    th Type
+    th Date
+    th Attachment
+    th
+    th
+   
+  - @transactions.each do |transaction|
+    tr
+      td= "#{number_to_currency(transaction.quantity, unit: '$')}"
+      td= transaction.caption
+      td= transaction.trans_type
+      td
+        - if transaction.category
+          = transaction.category.name
+      td= transaction.created_at
+      td
+        - if transaction.attachment.url
+          = link_to "Show Attachment", transaction.attachment.url, target: "_blank"
+      td
+        = link_to "Edit", edit_transaction_path(transaction)
+      td
+        = link_to "Delete", transaction_path(transaction), method: :delete, data: { confirm: 'Are you sure?' }

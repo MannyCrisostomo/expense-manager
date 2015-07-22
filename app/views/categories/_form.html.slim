@@ -1,0 +1,19 @@
+= form_for @category do |f|
+  - if @category.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@category.errors.count, "error")} prohibited this category from being saved:"
+      ul
+        - @category.errors.full_messages.each do |message|
+          li = message
+
+  .form_group
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+  .form_group
+    = f.label :category_type
+    = f.select :category_type, options_for_select(Category.category_types.collect { |s| [s[0].humanize, s[0]] }, selected: @category.category_type), {}, { class: "form-control"}
+
+  hr
+
+  .form-group
+    = f.submit 'Save', class: 'btn btn-primary'
